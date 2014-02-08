@@ -25,40 +25,33 @@
     <script type="text/javascript">
       $(function(){
         var forksUrl = 'https://api.github.com/gists/6859173/forks',
-            auth = '?access_token=78d729db8f64c986906175d177dbcb33e024d7ba',
-            forkTemplate = '<h3><a href="{{url}}">{{name}}</a></h3>{{description}}',
+            auth = '',//'?access_token=78d729db8f64c986906175d177dbcb33e024d7ba',
             $list = $('#list');
 
         $list.dataTable({
           iDisplayLength: 10,
           bLengthChange: false,
-          bInfo: false,
           sDom: 'lfprti'
         });
 
-        var doFork = function(forkUrl) {
-          $.getJSON(forkUrl + auth)
-            .done(function(fork) {
-              var desc = JSON.parse(fork.files['command.json'].content);
-              if (desc.name == 'Example Command') {
-                return;
-              }
-              $list.dataTable().fnAddData([
-                desc.name,
-                desc.description,
-                '<a href="' + fork.html_url + '">' + fork.user.login + '/' + fork.id + '</a>'
-              ]);
-            })
-            .fail(function(data) {
-              console.log(data.responseJSON.message);
-            });
-        };
-
-
         $.getJSON(forksUrl + auth)
           .done(function(data) {
-            $.each(data, function(index, fork) {
-              doFork(fork.url);
+            $.each(data, function(index, forkItem) {
+              $.getJSON(forkItem.url + auth)
+                .done(function(fork) {
+                  var desc = JSON.parse(fork.files['command.json'].content);
+                  if (desc.name == 'Example Command') {
+                    return;
+                  }
+                  $list.dataTable().fnAddData([
+                    desc.name,
+                    desc.description,
+                    '<a href="' + fork.html_url + '">' + fork.user.login + '/' + fork.id + '</a>'
+                  ]);
+                })
+                .fail(function(data) {
+                  console.log(data.responseJSON.message);
+                });
             })
           })
           .fail(function(data) {
