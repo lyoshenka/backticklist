@@ -5,23 +5,20 @@
     <title>Backtick.io Custom Commands</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.4.1/pure-min.css">
     <link rel="stylesheet" href="/style.css">
-    <style type="text/css">
-      ul,li { list-style-type: none; }
-    </style>
   </head>
   <body>
-    <div class="pure-u-7-8">
+    <div class="content">
       <h1>Backtick.io Custom Commands</h1>
       <table id="list" class="pure-table pure-table-striped">
         <thead>
           <th>Name</th>
           <th>Description</th>
-          <th>URL</th>
+          <th>Link</th>
         </thead>
         <tbody></tbody>
       </table>
     </div>
-    
+
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="http://www.datatables.net/release-datatables/media/js/jquery.dataTables.min.js"></script>
 
@@ -33,9 +30,10 @@
             $list = $('#list');
 
         $list.dataTable({
-          iDisplayLength: 20,
+          iDisplayLength: 10,
           bLengthChange: false,
-          bInfo: false
+          bInfo: false,
+          sDom: 'lfprti'
         });
 
         var doFork = function(forkUrl) {
@@ -48,7 +46,7 @@
               $list.dataTable().fnAddData([
                 desc.name,
                 desc.description,
-                fork.html_url
+                '<a href="' + fork.html_url + '">' + fork.user.login + '/' + fork.id + '</a>'
               ]);
             })
             .fail(function(data) {

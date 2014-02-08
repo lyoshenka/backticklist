@@ -1,0 +1,40 @@
+ul,li {
+  list-style-type: none;
+}
+
+.content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.dataTables_filter {
+  margin-bottom: 20px;
+}
+
+.dataTables_paginate {
+  margin-bottom: 5px;
+}
+
+.dataTables_paginate a {
+  cursor: pointer;
+}
+
+.paginate_disabled_previous,
+.paginate_disabled_next {
+  color: gray;
+}
+
+.paginate_enabled_previous:before,
+.paginate_disabled_previous:before {
+  content: '<< ';
+}
+
+.paginate_enabled_next:after,
+.paginate_disabled_next:after {
+  content: ' >>';
+}
+
+.paginate_enabled_next,
+.paginate_disabled_next {
+  margin-left: 25px;
+}
