@@ -7,6 +7,10 @@ ul,li {
   margin: 0 auto;
 }
 
+.update-date {
+  color: #808080;
+}
+
 .dataTables_filter {
   margin-bottom: 20px;
 }
@@ -25,7 +29,7 @@ ul,li {
 
 .paginate_disabled_previous,
 .paginate_disabled_next {
-  color: gray;
+  color: #808080;
 }
 
 .paginate_enabled_previous:before,

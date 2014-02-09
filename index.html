@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="content">
-      <h1>Backtick.io Custom Commands</h1>
+      <h1><a href="http://backtick.io">Backtick.io</a> Custom Commands</h1>
       <table id="list" class="pure-table pure-table-striped">
         <thead>
           <th>Name</th>
@@ -17,18 +17,24 @@
         </thead>
         <tbody></tbody>
       </table>
+      <h4 class="update-date">Last updated: <span id="updated-at"></span></h4>
     </div>
+
+    <a href="https://github.com/lyoshenka/backticklist"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_gray_6d6d6d.png" alt="Fork me on GitHub"></a>
 
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
     <script src="http://www.datatables.net/release-datatables/media/js/jquery.dataTables.min.js"></script>
 
     <script type="text/javascript">
       $(function() {
-        $('#list').dataTable({
-          iDisplayLength: 10,
-          bLengthChange: false,
-          sDom: 'lfprti',
-          sAjaxSource: 'data.json'
+        $.getJSON('data.json', function(data) {
+          $('#updated-at').text(data.updatedAt);
+          $('#list').dataTable({
+            iDisplayLength: 10,
+            bLengthChange: false,
+            sDom: 'lfprti',
+            aaData: data.aaData
+          });
         });
       });
     </script>

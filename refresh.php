@@ -31,7 +31,7 @@ $forks = curl("https://api.github.com/gists/6859173/forks", $token);
 echo "Found " . count($forks) . " forks\n";
 
 $tableData = [];
-$count = 0:
+$count = 0;
 
 foreach($forks as $fork) {
   $count++;
@@ -55,4 +55,4 @@ foreach($forks as $fork) {
 
 echo count($tableData) . " non-example scripts found\n";
 
-file_put_contents('data.json', json_encode(['aaData' => $tableData]));
+file_put_contents('data.json', json_encode(['aaData' => $tableData, 'updatedAt' => date('M j, Y @ H:i')]));
