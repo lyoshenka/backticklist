@@ -23,40 +23,13 @@
     <script src="http://www.datatables.net/release-datatables/media/js/jquery.dataTables.min.js"></script>
 
     <script type="text/javascript">
-      $(function(){
-        var forksUrl = 'https://api.github.com/gists/6859173/forks',
-            auth = '',//'?access_token=78d729db8f64c986906175d177dbcb33e024d7ba',
-            $list = $('#list');
-
-        $list.dataTable({
+      $(function() {
+        $('#list').dataTable({
           iDisplayLength: 10,
           bLengthChange: false,
-          sDom: 'lfprti'
+          sDom: 'lfprti',
+          sAjaxSource: 'data.json'
         });
-
-        $.getJSON(forksUrl + auth)
-          .done(function(data) {
-            $.each(data, function(index, forkItem) {
-              $.getJSON(forkItem.url + auth)
-                .done(function(fork) {
-                  var desc = JSON.parse(fork.files['command.json'].content);
-                  if (desc.name == 'Example Command') {
-                    return;
-                  }
-                  $list.dataTable().fnAddData([
-                    desc.name,
-                    desc.description,
-                    '<a href="' + fork.html_url + '">' + fork.user.login + '/' + fork.id + '</a>'
-                  ]);
-                })
-                .fail(function(data) {
-                  console.log(data.responseJSON.message);
-                });
-            })
-          })
-          .fail(function(data) {
-            alert(data.responseJSON.message);
-          });
       });
     </script>
   </body>
