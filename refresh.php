@@ -23,6 +23,10 @@ function curl($url, $token) {
 }
 
 
+if (!file_exists('token')) {
+  echo "Put your github token in a file called 'token'\n";
+  die();
+}
 
 $token = trim(file_get_contents('token'));
 
